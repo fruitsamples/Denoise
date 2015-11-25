@@ -1,0 +1,62 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1022
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 ArialMT;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww22300\viewh21380\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+\cf0 {{\NeXTGraphic lena_noisy_small.png \width2560 \height2560
+}¬}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\fs72 \cf0 Denoise
+\f1\fs20 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\f2\fs24 \cf0 05/26/2009
+\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural
+\cf0 \
+Description
+\b0 :\
+\
+\pard\pardeftab720\ql\qnatural
+\cf0 This application demonstrates how to use the Core Image noise-reduction and median filters to denoise a picture, and then save the results as a JPEG picture using Core Graphics APIs.\
+\
+\ul Base Classes\ulnone :\
+\
+\'95 ImageAuthor - Utility class for constructing CGImageRefs from a memory bucket.\
+\'95 OpenGLFBO - A base class that manages an OpenGL framebuffer object.\
+\'95 OpenGLView - Utility class that implements a custom OpenGL view, that includes basic mouse interaction.\
+\'95 OpenGLViewController - Controller class that implements UI actions for interacting with the filters.\
+\
+\ul Derived Classes\ulnone :\
+\
+\'95 CIDenoiseFilter - Utility class derived from OpenGLFBO that implements render-to-texture method, and further acts a mediator with CI median and noise-reduction filters.\
+\
+\pard\pardeftab720\ql\qnatural
+\cf0 \ul \ulc0 Class Hierarchy\ulnone :\
+\pard\pardeftab720\qc
+\cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc\pardirnatural
+
+\f0 \cf0 {{\NeXTGraphic Denoise Class Hierarchy.jpg \width9800 \height26760
+}¬}
+\f2\fs20 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+
+\fs24 \cf0 \ul \ulc0 Mac OS X Frameworks:\ulnone \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sa240\ql\qnatural
+\cf0 In this sample we're using the following framework APIs:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+\cf0 \'95 CoreImage is used for denoting of pictures.\
+\'95 CoreGraphics is used for saving images to a file.\
+\'95 NSOpenGLView is used as our view, where one draws denoised images.\
+}
