@@ -1,8 +1,10 @@
 //---------------------------------------------------------------------------
 //
-//	File: CVGLTexture2D.m
+//	File: CVGLImagebuffer.h
 //
-//  Abstract: CV utility toolkit for managing texture updates.
+//  Abstract: A facade for managing Core Video image buffer references
+//            with OpenGL PBO, FBO, texture range, or texture 2D backing 
+//            stores.
 // 			 
 //  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
 //  Computer, Inc. ("Apple") in consideration of your agreement to the
@@ -48,153 +50,50 @@
 
 //---------------------------------------------------------------------------
 
-#import "CVGLTexture2D.h"
+typedef struct CVGLImagebufferData *CVGLImagebufferDataRef;
 
 //---------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------
-
-#pragma mark -
-
-//---------------------------------------------------------------------------
-
-@implementation CVGLTexture2D
-
-//---------------------------------------------------------------------------
-
-#pragma mark -
-#pragma mark Constructor
-
-//---------------------------------------------------------------------------
-//
-// Initialize
-//
-//---------------------------------------------------------------------------
-
-- (id) initTexture2DWithSize:(const NSSize *)theSize
-                      target:(const GLenum)theTarget
-                      format:(const GLenum)theFormat
+@interface CVGLImagebuffer : NSObject
 {
-	self = [super initTexture2DWithSize:theSize
-                                 target:theTarget
-                                  level:0
-                                 format:theFormat
-                                 border:NO];
-	
-    if( self )
-    {
-        pixels  = NULL;
-        surface = NULL;
-    } // if
-    else
-    {
-        NSLog( @">> ERROR: CV Texture 2D - Failed allocating base class for a texture 2D/rectangle backing store!" );
-	} // else
-	
-	return  self;
-} // initTexture2DWithSize
+    @private
+        CVGLImagebufferDataRef mpImagebuffer;
+} // CVGLImagebuffer
 
-//---------------------------------------------------------------------------
+- (id) initImagebufferWithSize:(const NSSize *)theSize;
 
-- (id) initTexture2DWithSize:(const NSSize *)theSize
-                      target:(const GLenum)theTarget
-                      format:(const GLenum)theFormat
-                        hint:(const GLenum)theHint
-{
-	self = [super initTexture2DWithSize:theSize
-                                 target:theTarget
-                                  level:0
-                                 format:theFormat
-                                   hint:theHint
-                                 border:NO];
-	
-    if( self )
-    {
-        pixels  = NULL;
-        surface = NULL;
-    } // if
-    else
-    {
-        NSLog( @">> ERROR: CV Texture 2D - Failed allocating base class for a texture 2D range backing store!" );
-	} // else
-	
-	return  self;
-} // initTexture2DWithSize
+- (id) initImagebufferWithSize:(const NSSize *)theSize
+                        target:(const GLenum)theTarget
+                        format:(const GLenum)theFormat;
 
-//---------------------------------------------------------------------------
+- (id) initImagebufferWithSize:(const NSSize *)theSize
+                        target:(const GLenum)theTarget
+                        format:(const GLenum)theFormat
+                          hint:(const GLenum)theHint;
 
-- (id) initTexture2DWithSize:(const NSSize *)theSize
-                      target:(const GLenum)theTarget
-                      format:(const GLenum)theFormat
-                        hint:(const GLenum)theHint
-                     mipmaps:(const BOOL)hasMipmaps
-{
-	self = [super initTexture2DWithSize:theSize
-                                 target:theTarget
-                                  level:0
-                                 format:theFormat
-                                   hint:theHint
-                                 border:NO
-                                mipmaps:hasMipmaps];
-	
-    if( self )
-    {
-        pixels  = NULL;
-        surface = NULL;
-    } // if
-    else
-    {
-        NSLog( @">> ERROR: CV Texture 2D - Failed allocating base class for a texture 2D range backing store!" );
-	} // else
-	
-	return  self;
-} // initTexture2DWithSize
+- (id) initImagebufferWithSize:(const NSSize *)theSize
+                        target:(const GLenum)theTarget
+                        format:(const GLenum)theFormat
+                          hint:(const GLenum)theHint
+                       mipmaps:(const BOOL)hasMipmaps;
 
-//---------------------------------------------------------------------------
+- (id) initImagebufferWithSize:(const NSSize *)theSize
+                         usage:(const GLenum)theUsage
+                        target:(const GLenum)theTarget
+                        format:(const GLenum)theFormat;
 
-//---------------------------------------------------------------------------
+- (GLenum) format;
+- (GLenum) target;
 
-#pragma mark -
-#pragma mark Destructor
+- (GLuint) width;
+- (GLuint) height;
 
-//---------------------------------------------------------------------------
+- (void) bind;
+- (void) unbind;
 
-- (void) dealloc 
-{
-    CVPixelBufferRelease( pixels );
-    
-    [super dealloc];
-} // dealloc
+- (BOOL) setSize:(const NSSize *)theSize;
 
-//---------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
-
-#pragma mark -
-#pragma mark Utilities - Update - PBOs & Textures
-
-//---------------------------------------------------------------------------
-//
-// Copy pixels from a CV pixel buffer to a destination pbo buffer and 
-// vertical reflect.
-//
-//---------------------------------------------------------------------------
-
-- (void) update:(CVImageBufferRef)theImageBuffer
-{
-    CVPixelBufferRelease( pixels );
-    CVPixelBufferRetain( theImageBuffer );
-    
-    pixels  = theImageBuffer;
-    surface = CVPixelBufferGetIOSurface(pixels);
-    
-    const GLvoid *pixelsSrc = IOSurfaceGetBaseAddressOfPlane(surface,0);
-    
-    [self copy:pixelsSrc 
-          doVR:YES];
-} // update
-
-//---------------------------------------------------------------------------
+- (void) update:(CVImageBufferRef)theImageBuffer;
 
 @end
 

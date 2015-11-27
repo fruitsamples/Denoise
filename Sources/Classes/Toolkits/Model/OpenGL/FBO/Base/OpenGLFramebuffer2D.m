@@ -370,11 +370,11 @@ static BOOL OpenGLFramebuffer2DCreateFramebuffer( OpenGLFramebuffer2DDataRef pFr
                                   pFramebuffer2D->renderbuffer.target, 
                                   pFramebuffer2D->renderbuffer.name);
 		
-		glBindRenderbuffer(pFramebuffer2D->renderbuffer.target, 0);
-		glBindFramebuffer(pFramebuffer2D->framebuffer.target, 0);
-		
 		pFramebuffer2D->framebuffer.isValid = [[OpenGLFramebuffer2DStatus statusWithTarget:pFramebuffer2D->framebuffer.target 
                                                                                       exit:YES] isComplete];
+
+		glBindRenderbuffer(pFramebuffer2D->renderbuffer.target, 0);
+		glBindFramebuffer(pFramebuffer2D->framebuffer.target, 0);
 	} // if
     else
     {

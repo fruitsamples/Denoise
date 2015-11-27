@@ -215,7 +215,7 @@ static CVReturn CoreVideoRenderCallback(CVDisplayLinkRef    displayLink,
             mpCVGLView->format[1] = (kCVPixelFormatType_422YpCbCr8 & 0x0000FF00) >> 8;
             mpCVGLView->format[2] = (kCVPixelFormatType_422YpCbCr8 & 0x00FF0000) >> 16;
             mpCVGLView->format[3] = (kCVPixelFormatType_422YpCbCr8 & 0xFF000000) >> 24;
-            mpCVGLView->format[5] = '\0';
+            mpCVGLView->format[4] = '\0';
             
             // OpenGL context attributes
             

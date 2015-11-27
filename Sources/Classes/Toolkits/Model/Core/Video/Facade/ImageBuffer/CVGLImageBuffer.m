@@ -144,7 +144,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
         {
             mpImagebuffer->target = theTarget;
             mpImagebuffer->format = theFormat;
-            
+
             mpImagebuffer->buffer = [[CVGLTexture2D alloc] initTexture2DWithSize:theSize
                                                                           target:theTarget
                                                                           format:theFormat];
@@ -157,7 +157,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
             {
                 mpImagebuffer->width  = [mpImagebuffer->buffer width];
                 mpImagebuffer->height = [mpImagebuffer->buffer height];
-            } // else
+           } // else
         } // if
 	} // if
 	
@@ -181,7 +181,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
         {
             mpImagebuffer->target = theTarget;
             mpImagebuffer->format = theFormat;
-            
+
             mpImagebuffer->buffer = [[CVGLTexture2D alloc] initTexture2DWithSize:theSize
                                                                           target:theTarget
                                                                           format:theFormat
@@ -189,7 +189,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
             
             if( !mpImagebuffer->buffer )
             {
-                NSLog( @">> ERROR: CoreVideo Imagebuffer - Failed instantiating a texture 2D range backing store!" );
+                NSLog( @">> ERROR: CoreVideo Imagebuffer - Failed instantiating a texture 2D backing store with hint!" );
             } // if
             else
             {
@@ -229,7 +229,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
             
             if( !mpImagebuffer->buffer )
             {
-                NSLog( @">> ERROR: CoreVideo Imagebuffer - Failed instantiating a texture 2D range backing store!" );
+                NSLog( @">> ERROR: CoreVideo Imagebuffer - Failed instantiating a texture 2D backing store with hint and mipmaps!" );
             } // if
             else
             {
@@ -259,7 +259,7 @@ typedef struct CVGLImagebufferData  CVGLImagebufferData;
         {
             mpImagebuffer->target = theTarget;
             mpImagebuffer->format = theFormat;
-            
+
             mpImagebuffer->buffer = [[CVGLPixelbuffer alloc] initTexture2DAuthorWithSize:theSize
                                                                                    usage:theUsage
                                                                                   target:theTarget
